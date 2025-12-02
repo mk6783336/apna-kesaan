@@ -1,30 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-        "./App.{js,jsx,ts,tsx}",
-        "./screens/**/*.{js,jsx,ts,tsx}",
-        "./components/**/*.{js,jsx,ts,tsx}",
-        "./navigation/**/*.{js,jsx,ts,tsx}"
-    ],
+    content: ["./App.{js,jsx,ts,tsx}", "./screens/**/*.{js,jsx,ts,tsx}", "./navigation/**/*.{js,jsx,ts,tsx}"],
     presets: [require("nativewind/preset")],
     theme: {
         extend: {
             colors: {
-                emerald: {
-                    500: '#10B981', // Primary
-                },
-                cyan: {
-                    500: '#06B6D4', // Secondary
-                },
-                charcoal: {
-                    900: '#111827', // Dark Mode Background
-                }
+                primary: '#4C7C29', // Lush Green
+                secondary: '#D1FAE5', // Light Green
+                dark: '#1F2937', // Charcoal
             },
-            fontFamily: {
-                montserrat: ['Montserrat_700Bold'],
-                hind: ['Hind_400Regular'],
-            }
         },
     },
     plugins: [],
-}
+};
