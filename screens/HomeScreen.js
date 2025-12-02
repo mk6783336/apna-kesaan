@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const OPENWEATHER_API = '9461f3ab297c0a8fd2fce4f93eeb0985';
+const BACKEND_URL = 'http://192.168.100.237:5000';
 
 export default function HomeScreen({ navigation }) {
     const [weather, setWeather] = useState({ temp: 17, humidity: 59, wind: 6 });
@@ -15,17 +15,20 @@ export default function HomeScreen({ navigation }) {
 
     const fetchWeather = async () => {
         try {
-            const response = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?q=Multan,PK&appid=${OPENWEATHER_API}&units=metric`
-            );
+            // Call backend API instead of directly calling OpenWeather
+            const response = await fetch(`${BACKEND_URL}/api/weather?city=Multan`);
             const data = await response.json();
-            setWeather({
-                temp: Math.round(data.main.temp),
-                humidity: data.main.humidity,
-                wind: Math.round(data.wind.speed),
-            });
+
+            if (data.success) {
+                setWeather({
+                    temp: data.temperature,
+                    humidity: data.humidity,
+                    wind: data.windSpeed,
+                });
+            }
         } catch (error) {
             console.log('Weather error:', error);
+            // Keep default values if API fails
         }
     };
 
